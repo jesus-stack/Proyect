@@ -58,10 +58,7 @@ public class TipoUsuarioDLL {
     
     }
 
-    public static TipoUsuario traerTipoUsuarioPorDescripcion(String d) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-    
+  
     
     
     
