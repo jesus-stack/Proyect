@@ -221,13 +221,12 @@ create Procedure [dbo].[InsertarCliente]
 as
 
 begin
-insert into usuario ([id],[contrasenna],[tipoUsuario]) values (@id,encryptbypassphrase('password',@contrasenna),@TipoUsuario)
+insert into usuario ([id],[contrasenna],[tipoUsuario]) values (@Id,encryptbypassphrase('password',@contrasenna),@TipoUsuario)
 insert into Cliente([id],[nombre],[sNombre],[apellido],[sApellido],[correo],[telefono] )
 values (@Id,@Nombre,@sNombre,@Apellido,@sApellido,@correo,@Telefono)
 
 end;
 go
-
 
 
 

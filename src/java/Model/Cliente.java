@@ -6,6 +6,7 @@
 package Model;
 
 import Model.Tipo.TipoUsuario;
+import java.util.ArrayList;
 
 /**
  *
@@ -14,16 +15,18 @@ import Model.Tipo.TipoUsuario;
 public class Cliente extends Usuario {
 
     private long identificacion;
-    private String nombre, sNombre, apellido, sApellido, correo;
+    private String nombre, SegundoNombre, apellido, SegundoApellido, correo;
     private int telefono;
-
+    private ArrayList<Direccion> ArrayDireccione=new ArrayList<Direccion>();
+   
+  
     public Cliente(long id, String nombre, String sNombre, String apellido, String sApellido, String correo, int telefono,String clave,boolean estado,TipoUsuario tipo) {
         super(id, clave, estado, tipo);
         this.identificacion = id;
         this.nombre = nombre;
-        this.sNombre = sNombre;
+        this.SegundoNombre = sNombre;
         this.apellido = apellido;
-        this.sApellido = sApellido;
+        this.SegundoApellido = sApellido;
         this.correo = correo;
         this.telefono = telefono;
     }
@@ -32,14 +35,38 @@ public class Cliente extends Usuario {
        super();
         this.identificacion=0;
         this.nombre = "";
-        this.sNombre = "";
+        this.SegundoNombre = "";
         this.apellido = "";
-        this.sApellido = "";
+        this.SegundoApellido = "";
         this.correo = "";
         this.telefono = 0;
-    
-    
     }
+
+    public String getSegundoNombre() {
+        return SegundoNombre;
+    }
+
+    public void setSegundoNombre(String SegundoNombre) {
+        this.SegundoNombre = SegundoNombre;
+    }
+
+    public String getSegundoApellido() {
+        return SegundoApellido;
+    }
+
+    public void setSegundoApellido(String SegundoApellido) {
+        this.SegundoApellido = SegundoApellido;
+    }
+
+    public ArrayList<Direccion> getArrayDireccione() {
+        return ArrayDireccione;
+    }
+
+    public void setArrayDireccione(ArrayList<Direccion> ArrayDireccione) {
+        this.ArrayDireccione = ArrayDireccione;
+    }
+    
+    
 
     public long getIdentificacion() {
         return identificacion;
@@ -57,13 +84,6 @@ public class Cliente extends Usuario {
         this.nombre = nombre;
     }
 
-    public String getsNombre() {
-        return sNombre;
-    }
-
-    public void setsNombre(String sNombre) {
-        this.sNombre = sNombre;
-    }
 
     public String getApellido() {
         return apellido;
@@ -73,13 +93,6 @@ public class Cliente extends Usuario {
         this.apellido = apellido;
     }
 
-    public String getsApellido() {
-        return sApellido;
-    }
-
-    public void setsApellido(String sApellido) {
-        this.sApellido = sApellido;
-    }
 
     public String getCorreo() {
         return correo;
@@ -96,5 +109,17 @@ public class Cliente extends Usuario {
     public void setTelefono(int telefono) {
         this.telefono = telefono;
     }
-
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 }

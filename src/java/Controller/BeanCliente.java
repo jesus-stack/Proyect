@@ -6,6 +6,7 @@
 package Controller;
 
 import DAO.Conexion.SNMPExceptions;
+import DAO.TipoUsuarioDLL;
 import DAO.UsuarioDLL;
 import Model.Cliente;
 import Model.Funcionario;
@@ -29,12 +30,23 @@ public class BeanCliente implements Serializable {
 
     Cliente cliente=new Cliente();
     String tipoUsuario;
+    String mensaje;
+    String error;
 
 
     public String getTipoUsuario() {
         return tipoUsuario;
         
     }
+
+    public String getMensaje() {
+        return mensaje;
+    }
+
+    public void setMensaje(String mensaje) {
+        this.mensaje = mensaje;
+    }
+    
 
     public void setTipoUsuario(String tipoUsuario) {
         this.tipoUsuario = tipoUsuario;
@@ -56,29 +68,54 @@ public class BeanCliente implements Serializable {
     
     
     
-    public void insertarCliente(Cliente c) throws NamingException, SNMPExceptions, SQLException, ClassNotFoundException{
-   
-   
-    UsuarioDLL.insertarCliente(c);
-    }
-   
-    
-    public LinkedList <SelectItem> listaTipoUsuario() throws SNMPExceptions{
-    LinkedList lista=new LinkedList();
-        
-        for (TipoUsuario o : UsuarioDLL.listaTipoUsuario()) {
-            if(o.getId()!=1){
-            lista.add(new SelectItem(o.getDescripcion()));
+    public String insertarCliente() throws NamingException, SNMPExceptions, SQLException, ClassNotFoundException{
+       
+            
+             try {
+                 
+               UsuarioDLL.insertarCliente(cliente);
+                mensaje="login.xhtml";
+        } catch (Exception e) {
+            error="Error al registrar el cliente";
         }
-            }
+ 
     
-    return lista;
+            return mensaje;
+      
+ 
     }
+
+    public String getError() {
+        return error;
+    }
+
+    public void setError(String error) {
+        this.error = error;
+    }
+   
+    
+//    public LinkedList <SelectItem> listaTipoUsuario() throws SNMPExceptions{
+//    LinkedList lista=new LinkedList();
+//        
+//        for (TipoUsuario o : UsuarioDLL.listaTipoUsuario()) {
+//            if(o.getId()!=1){
+//            lista.add(new SelectItem(o.getDescripcion()));
+//        }
+//            }
+//    
+//    return lista;
+//    }
+    
+    
+ public void InsertarTipoCliente() throws SNMPExceptions{
+
+ }   
     
     
    public void insertarTipoUsuario() throws SNMPExceptions{
    TipoUsuario t =new TipoUsuario();
   cliente.setTipo(t.traerTipo(tipoUsuario));
+  
    }
     
     

@@ -13,38 +13,35 @@
             <ui:define name="content">
                 <h:form>
                      <H5>Identificacion</H5>
-                     <p:inputText value="#{ }" required="true" requiredMessage="CAMPO OBLIGATORIO"></p:inputText>
+                     <p:inputText value="#{beanCliente.cliente.identificacion}" required="true" requiredMessage="CAMPO OBLIGATORIO"></p:inputText>
                     <H5>Primer nombre</H5>
-                    <p:inputText required="true" requiredMessage="CAMPO OBLIGATORIO"></p:inputText>
+                    <p:inputText value="#{beanCliente.cliente.nombre}" required="true" requiredMessage="CAMPO OBLIGATORIO"></p:inputText>
                      <H5>Segundo nombre</H5>
-                    <p:inputText required="true" requiredMessage="CAMPO OBLIGATORIO"></p:inputText>
+                     <p:inputText value="#{beanCliente.cliente.segundoNombre}" required="true" requiredMessage="CAMPO OBLIGATORIO"></p:inputText>
                        <H5>Primer apellido</H5>
-                    <p:inputText required="true" requiredMessage="CAMPO OBLIGATORIO"></p:inputText>
+                       <p:inputText value="#{beanCliente.cliente.apellido}" required="true" requiredMessage="CAMPO OBLIGATORIO"></p:inputText>
                      <H5>Segundo apellido</H5>
-                    <p:inputText required="true" requiredMessage="CAMPO OBLIGATORIO"></p:inputText>
+                     <p:inputText value="#{beanCliente.cliente.segundoApellido}" required="true" requiredMessage="CAMPO OBLIGATORIO"></p:inputText>
                   <H5>Telefono</H5>
-                    <p:inputText required="true" requiredMessage="CAMPO OBLIGATORIO"></p:inputText>
+                  <p:inputText value="#{beanCliente.cliente.telefono}" required="true" requiredMessage="CAMPO OBLIGATORIO"></p:inputText>
                <H5>Correo</H5>
-                    <p:inputText required="true" requiredMessage="CAMPO OBLIGATORIO"></p:inputText>
+               <p:inputText value="#{beanCliente.cliente.correo}" required="true" requiredMessage="CAMPO OBLIGATORIO"></p:inputText>
                      <H5>Contraseña</H5>
-                    <p:inputText required="true" requiredMessage="CAMPO OBLIGATORIO"></p:inputText>
+                     <p:inputText value="#{beanCliente.cliente.contrasenna}" required="true" requiredMessage="CAMPO OBLIGATORIO"></p:inputText>
                     <H5>Tipo de Usuario</H5>
-                    <h:selectOneMenu >
-                        <f:selectItems value="#{beanCliente.listaTipoUsuario()}"/>
-                       </h:selectOneMenu>
+                 
                     <h5>Direcciones</h5>
                      
                     <h6>Agregar direccion</h6>
                       <h5>Basic</h5>
-         <p:multiSelectListbox value="#{multiSelectView.selection}" effect="slide" header="Direccion"
-                            showHeaders="true">
-        <f:selectItems value="#{multiSelectView.categories}"/>
-    </p:multiSelectListbox>
-                        
+    
                           <p:commandButton value="Agregar direccion"></p:commandButton>
                           <br/><br/>
                 
-                    <p:commandButton ajax="false" value="Registrar"></p:commandButton>
+                          <p:commandButton ajax="false" value="Registrar" action="#{beanCliente.insertarCliente()}"   ></p:commandButton>
+                          <h:outputLabel value="#{beanCliente.error}"/>
+                        
+                         
                 </h:form>
               
             </ui:define>

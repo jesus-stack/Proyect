@@ -35,11 +35,13 @@ public class UsuarioDLL {
  
  
  
- public static void insertarCliente(Usuario cliente) throws NamingException, SNMPExceptions, SQLException, ClassNotFoundException{
- 
- String procedure="exec InsertarCliente "+((Cliente)cliente).getId()+" '"+((Cliente)cliente).getNombre()+"' '"+((Cliente)cliente).getsNombre()+"' '"
-        +((Cliente)cliente).getApellido()+"' '"+((Cliente)cliente).getsApellido()+"' '"+((Cliente)cliente).getCorreo()+"' "+((Cliente)cliente).getTelefono()+
-         " '"+((Cliente)cliente).getContrasenna()+"' "+((Cliente)cliente).getTipo().getId();
+ public static void insertarCliente(Cliente cliente) throws NamingException, SNMPExceptions, SQLException, ClassNotFoundException{
+     
+ cliente.setTipo(TipoUsuarioDLL.traerTipoUsuarioPorDescripcion("Cliente"));
+
+ String procedure="exec InsertarCliente "+((Cliente)cliente).getIdentificacion()+", '"+((Cliente)cliente).getNombre()+"', '"+((Cliente)cliente).getSegundoNombre()+"', '"
+        +((Cliente)cliente).getApellido()+"', '"+((Cliente)cliente).getSegundoApellido()+"', '"+((Cliente)cliente).getCorreo()+"', "+((Cliente)cliente).getTelefono()+
+         ", '"+((Cliente)cliente).getContrasenna()+"', "+((Cliente)cliente).getTipo().getId();
  
  
  AccesoDatos datos=new AccesoDatos();

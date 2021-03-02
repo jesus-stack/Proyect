@@ -6,9 +6,15 @@
 package DAO;
 
 import DAO.Conexion.SNMPExceptions;
+import Model.Cliente;
 import Model.Tipo.TipoUsuario;
+import com.sun.codemodel.JOp;
+import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.naming.NamingException;
+import javax.swing.JOptionPane;
+import javax.swing.JTextArea;
 
 /**
  *
@@ -33,14 +39,14 @@ public class prueba extends javax.swing.JFrame {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        txt = new javax.swing.JTextArea();
         jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane1.setViewportView(jTextArea1);
+        txt.setColumns(20);
+        txt.setRows(5);
+        jScrollPane1.setViewportView(txt);
 
         jButton1.setText("jButton1");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -78,11 +84,12 @@ public class prueba extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         try {
-            for (TipoUsuario object : UsuarioDLL.listaTipoUsuario()) {
-              jTextArea1.append(object.getDescripcion());
-            }
-        } catch (SNMPExceptions ex) {
-            Logger.getLogger(prueba.class.getName()).log(Level.SEVERE, null, ex);
+            Cliente cliente=new Cliente(12, "hola", "como","esta", "usted", "si",3, "adios",true, new TipoUsuario(2, "Cliente"));
+            UsuarioDLL.insertarCliente(cliente);
+            
+            
+        } catch (SNMPExceptions | ClassNotFoundException | SQLException | NamingException e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -124,6 +131,6 @@ public class prueba extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextArea jTextArea1;
+    private javax.swing.JTextArea txt;
     // End of variables declaration//GEN-END:variables
 }
