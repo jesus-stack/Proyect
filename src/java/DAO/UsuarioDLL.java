@@ -91,7 +91,39 @@ public class UsuarioDLL {
     }
     
  
-     
+     public static Usuario UsuarioXidentificacion(long id) throws SNMPExceptions{
+    String select = "exec SeleccionaUsuarioXIdentificacion "+id;
+        Usuario usuario = new Usuario();
+
+        try {
+        
+            //Se instancia la clase de acceso a datos
+            AccesoDatos accesoDatos = new AccesoDatos();
+
+            //Se crea la sentencia de búsqueda
+         
+            //Se ejecuta la sentencia SQL
+            ResultSet rsPA = accesoDatos.ejecutaSQLRetornaRS(select);
+            //Se llena el arryaList con los proyectos 
+             while (rsPA.next()) {
+            usuario.setId(rsPA.getLong("id"));
+            usuario.setContrasenna(rsPA.getString("contrasenna"));
+            usuario.setTipo(new TipoUsuario(rsPA.getInt("tipoUsuario"),"usuario"));
+            usuario.setEstado((rsPA.getInt("estado")==1));
+             }
+            rsPA.close();
+
+        } catch (SQLException e) {
+            throw new SNMPExceptions(SNMPExceptions.SQL_EXCEPTION,
+                    e.getMessage(), e.getErrorCode());
+        } catch (Exception e) {
+            throw new SNMPExceptions(SNMPExceptions.SQL_EXCEPTION,
+                    e.getMessage());
+        } finally {
+
+        }
+        return usuario;
+    } 
      
      
      

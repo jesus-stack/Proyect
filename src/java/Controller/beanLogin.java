@@ -6,12 +6,14 @@
 package Controller;
 
 import DAO.Conexion.AccesoDatos;
+import DAO.Conexion.SNMPExceptions;
 import DAO.UsuarioDLL;
 import Model.Usuario;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
 import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 
 /**
  *
@@ -27,20 +29,41 @@ private static Usuario usuario=new Usuario();
     public beanLogin() {
     }
 
-    public static Usuario getUsuario() {
+    public Usuario getUsuario() {
         return usuario;
     }
 
-    public static void setUsuario(Usuario usuario) {
+    public void setUsuario(Usuario usuario) {
         beanLogin.usuario = usuario;
     }
-//    public void validarUsuario(){
-//        Usuario usuario=UsuarioDLL.SeleccionarUsuaioXIdentificacion(this.getUsuario().getId());       
-//          growlView view=new growlView();
-//          view.addMessage(FacesMessage.SEVERITY_ERROR, "!Datos Invalidos", "!Datos Invalidos");
-//        if(usuario==null){
-//         
-//            
-//        }
-//    }
+    
+    public String validarUsuario() throws SNMPExceptions{
+        String action="/login";
+       
+        FacesMessage mensajeM=new FacesMessage(FacesMessage.SEVERITY_ERROR,"!DATOS INVALIDOS","!DATOS INVALIDOS");
+        FacesMessage mensajeB=new FacesMessage(FacesMessage.SEVERITY_INFO,"!DATOS VALIDOS","!DATOS VALIDOS");
+        FacesContext context=FacesContext.getCurrentInstance();
+     
+        try {
+             Usuario usuario1=UsuarioDLL.UsuarioXidentificacion(this.getUsuario().getId());
+            if(usuario1.isEstado()==true&&usuario1.getContrasenna().equals(this.getUsuario().getContrasenna())){ 
+               context.addMessage(null, mensajeB);
+               action="/index";
+              
+            }
+            else{
+                context.addMessage(null, mensajeM);
+            }
+            
+        } catch (Exception e) {
+            context.addMessage(null, mensajeM);
+        }
+        finally{
+            return action;
+        
+            
+        }
+  }
 }
+
+

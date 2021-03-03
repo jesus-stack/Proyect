@@ -12,26 +12,28 @@
         <ui:define name="content" >
             <h:form>
                 <span class="ui-float-label">
-                    <p:inputText id="id" value="#{prueba.usuario.id}" required="true" requiredMessage="CAMPO OBLIGATORIO"/>
+                    <p:inputText id="id" value="#{beanLogin.usuario.id}" required="true" requiredMessage="CAMPO OBLIGATORIO"/>
                     <p:outputLabel for="@previous" value="Identificacion" />
                     <p:message for="id" display="icon"/>
                     <p:growl for="id" showDetail="true" showSummary="true"></p:growl>
                 </span>
                 <br/><br/>
                 <span class="ui-float-label">
-                    <p:password id="password" required="true" value="#{prueba.usuario.contrasenna}" requiredMessage="CAMPO OBLIGATORIO"/>
+                   
+                    <p:password id="password" required="true" value="#{beanLogin.usuario.contrasenna}" requiredMessage="CAMPO OBLIGATORIO"/>
                     <p:outputLabel for="@previous" value="Contraseña"/>
                      <p:message for="password" display="icon"/>
                 </span>
-                <br/><br/>
-                
+                <br/>  
+                 <h:messages id="msg" errorStyle="color:red" infoStyle="color:green"> </h:messages><br/>
 
-                <p:commandButton value="Ingresar" type="submit" actionListener="#{prueba.agregar()}" ajax="false"></p:commandButton>
+                <p:commandButton id="button" value="Ingresar" type="submit" action="#{beanLogin.validarUsuario()}" ajax="false"></p:commandButton>
                
             </h:form>
             <h:form>
                     <br/><br/>
-                 <p:commandLink action="cliente.xhtml" value="Crear Cuenta Nueva"></p:commandLink>
+                 <p:commandLink action="/cliente" value="Crear Cuenta Nueva"></p:commandLink>
+               
                 
             </h:form>
             
