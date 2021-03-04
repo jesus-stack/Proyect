@@ -7,17 +7,16 @@ package Controller;
 
 import Model.Product;
 import javax.inject.Named;
-import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
 import java.util.LinkedList;
-import java.util.List;
+import javax.enterprise.context.RequestScoped;
 
 /**
  *
  * @author Jesus
  */
 @Named(value = "beanProduct")
-@SessionScoped
+@RequestScoped
 public class BeanProduct implements Serializable {
 
     /**
