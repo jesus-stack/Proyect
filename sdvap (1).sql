@@ -1,8 +1,8 @@
 
 --Creacion de Base de Datos--
-create database SDVAP
+create database SDVA
 go
-use SDVAP
+use SDVA
 
 --Creacion de tabla cliente--
 create table cliente(
@@ -51,19 +51,26 @@ primary key (COD_provincia,COD_Canton,COD_Distrito,COD_Barrio)
 )
 
 
---creacion de tabla entre cliente y direcciones)
-create table clienteDireccion(
-idCliente bigint,
+--creacion de tabla dedirecciones)
+create table Direccion(
+id int identity(1,1) primary Key ,
 codProvincia numeric(2),
 codCanton numeric(2),
 codDistrito numeric(2),
 codbarrio numeric(4),
+Sennas Varchar(max),
+
+)
+
+--creacion de tabla clienteDireccion)
+create table ClienteDireccion(
+idCliente bigint,
+idDireccion int,
 diaInicio int,
 diaFinal int,
 horaInicio time,
 horaFinal time,
-
-primary key(idCliente,codProvincia,codCanton,codDistrito,codBarrio,diaInicio,horaInicio)
+primary key (idCliente,idDireccion)
 )
 
 --creacion de tabla dias--
@@ -107,86 +114,109 @@ cantidadMinimaVenta int,
 )
 
 
---creacion de tabla pedidos--
-create table pedido(
+--creacion de tabla transaccion--
+create table Transaccion(
 id int identity (1,1),
 idCliente bigint,
-codProvincia numeric(2),
-codCanton numeric(2),
-codDistrito numeric(2),
-codbarrio numeric(4),
-diaInicio int,
-horaInicio time,
-idProducto int,
-cantudad int,
-fechaEntrega date,
-estado bit default(0),
-primary key(idCliente,id)
-)
---creacion de tablas factura--
-
-create table factura(
-id int ,
-idCliente bigint,
+idDireccion int,
+fechaSolicitada date,
+fechaEmitida date,
+envio float,
 tipoPago int,
-descuento float
-primary key(id,idCliente)
+descuento float,
+tipoDespacho int,
+subtotal float,
+total float,
+estado int,
+primary key (id)
 )
 
+--creacion de esto de transacion--
+create table estadoTransaccion(
+id int primary key,
+descripcion varchar(25)
+)
+--creacion detalle transaccion--
+create table transaccionProducto(
+idTransaccion int,
+idProducto int,
+cantidad int,
+primary key (idTransaccion,idProducto)
+)
 --creacion de tabla tipoPago--
 create table tipoPago(
 id int primary key,
 descripcion varchar(20)
 )
 
-create table Despacho(
-IdFacturaPedido int,
-idCliente bigint,
-tipoDespacho int,
-Fecha datetime
-primary key(idFacturaPedido,idCliente)
-)
 
-create table tipoDespacho(
+create table tipoTransaccion(
 id int primary key,
 Descripcion nvarchar(30)
 )
 
+--creacion llaves foraneas--
+alter table transaccion
+add constraint FK_transaccion_TipoTransaccion  foreign key (TipoDespacho)references tipoTransaccion(id);
+go
 
---creacion de tabla
+alter table transaccionProducto
+add constraint  FK_TRansaccion_Producto foreign key (idProducto)   references producto(id)    ;
+go
+alter table transaccionProducto
+add constraint FK_Transaccion_transaccion   foreign key (idTransaccion  ) references  transaccion(id)   ;
+go
 
+alter table transaccion
+add constraint FK_Transaccion_tipoPago    foreign key (tipoPago)   references tipoPago(id)    ;
+go
 
---creacion de llaves foraneas--
-alter table clienteDireccion
-add constraint FK_ClienteDireccionesBarrio foreign key
-(codprovincia,codCanton,codDistrito,codBarrio)
-references Barrio(COD_Provincia,COD_Canton,COD_Distrito,COD_Barrio);
+alter table Funcionario
+add constraint FK_USUARIOCLIENTE   foreign key (id)    references  Usuario(id)    ;
+go
 
-alter table clienteDireccion
-add constraint FK_clienteDireccionDia foreign key (diaInicio) references dia(id);
-
-alter table funcionario add constraint FK_usuarioFuncionario foreign key(id) references usuario(id);
-alter table Cliente add constraint FK_usuarioCliente foreign key(id) references usuario(id);
-
-
-alter table usuario add constraint FK_UsuarioTipoUsuario foreign key (tipoUsuario) references tipoUsuario(id);
-
-alter table pedido
-add constraint FK_pedidoClienteDireccion foreign key
-(idCliente,codprovincia,codCanton,codDistrito,codBarrio,diaInicio,horaInicio)
-references clienteDireccion(idCliente,codprovincia,codCanton,codDistrito,codBarrio,diaInicio,horaInicio);
-alter table pedido add constraint FK_pedidoProducto foreign key (idProducto) references producto(id);
-
+alter table cliente
+add constraint FK_USUARIOFUNCIONARIO  foreign key (id)    references  Usuario(id)    ;
+go
 
 
-alter table factura add constraint FK_FacturaPedido foreign key (idCliente,id) references pedido (idCliente,id);
-alter table factura add Constraint FK_FacturaTipoPago foreign key (tipoPago) references tipoPago(id);
+alter table Canton
+add constraint Canton_FK foreign key (COD_Provincia) references Provincia(COD_Provincia);
+alter table Distrito
+add constraint Distrito_FK foreign key (COD_Provincia,COD_Canton) references Canton(COD_Provincia,COD_Canton);
+alter table Barrio
+add constraint Barrio_FK foreign key (COD_Provincia,COD_Canton,COD_Distrito) references Distrito(COD_Provincia,COD_Canton,COD_Distrito);
 
+alter table transaccion
+add constraint FK_Transaccion_Estado foreign key (estado) references estadoTransaccion(id)
 
+alter table Transaccion
+add constraint  FK_TransaccionCliente   foreign key  (idCliente)   references  Cliente(id)    ;
+go
 
---foraneas de despacho
-alter table despacho add constraint FK_DespachoPedido foreign key (idFacturaPedido,idCliente) references factura(id,idCliente)
-alter table despacho add constraint FK_TipoDespacho foreign key (TipoDespacho) references TipoDespacho(id)
+alter table Direccion
+add constraint FK_Direccion_Barrio foreign key (codProvincia,codCanton,codDistrito,codBarrio) references Barrio(COD_Provincia,COD_Canton,COD_Distrito,COD_Barrio);
+go
+
+alter table Usuario
+add constraint FK_Usuario_tipoUsuario foreign key (tipoUsuario) references tipoUsuario(id);
+go
+
+alter table ClienteDireccion
+add constraint FK_clienteDirecccion_Direccion foreign key ( idDireccion)references direccion(id);
+go
+
+alter table ClienteDireccion
+add constraint FK_clienteDirecccion_Cliente foreign key ( idCliente)references Cliente(id);
+go
+
+alter table ClienteDireccion
+add constraint FK_clienteDirecccion_DiaF foreign key ( diaFinal)references dia(id);
+go
+
+alter table ClienteDireccion
+add constraint FK_clienteDirecccion_DiaI foreign key ( diaFinal)references dia(id);
+go
 
 
 ---Insert Tipos de usuarios
@@ -196,13 +226,12 @@ insert into tipoUsuario (id,descripcion) values(3,'Cajero')
 insert into tipoUsuario (id,descripcion) values(4,'Bodeguero')
 
 --Insertar administrador
-insert into usuario(id,contrasenna,estado,tipoUsuario) values (155821845336,cast('admin' as varbinary(20)),1,1)
-insert into usuario(id,contrasenna,estado,tipoUsuario) values (402400637,cast('admin' as varbinary(20)),1,1)
+insert into usuario(id,contrasenna,estado,tipoUsuario) values (155821845336,encryptbypassphrase('password','admin'),1,1)
+insert into usuario(id,contrasenna,estado,tipoUsuario) values (402400637,encryptbypassphrase('password','admin'),1,1)
+
 Insert into funcionario (id,nombre,sNombre,apellido,sApellido,correo,telefono) values(155821845336,'Jesus','Maria','Castilla','Quintana','jcastilla@est.utn.ac.cr',64862101)
 Insert into funcionario (id,nombre,sNombre,apellido,sApellido,correo,telefono) values(402400637,'Hannyer','Smykel','Pitterson','Martinez','hpitterson@est.utn.ac.cr',60117773)
 go
-
-
 
 
 ---Store procedure Cliente
@@ -279,6 +308,16 @@ as
 
 begin
 select *from tipoUsuario where tipoUsuario.Descripcion=@Descripcion
+end
+go
+
+--sleccionar usuario por identificacion--
+create procedure [dbo].[SeleccionaUsuarioXIdentificacion] @id bigint
+as
+begin
+
+select id,convert(varchar,decryptbypassphrase('password',usuario.contrasenna)) 
+as contrasenna,usuario.tipoUsuario,usuario.estado from usuario where usuario.id=@id
 end
 go
 
@@ -15719,5 +15758,5 @@ INSERT [dbo].[Barrio] ([Cod_Provincia], [Cod_Canton], [Cod_Distrito], [Cod_Barri
 
 
 
-exec InsertarUsuario 456,'dfgdfg',3
+
 
