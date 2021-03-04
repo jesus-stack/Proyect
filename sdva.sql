@@ -234,39 +234,6 @@ Insert into funcionario (id,nombre,sNombre,apellido,sApellido,correo,telefono) v
 go
 
 
----Store procedure Cliente
---Insertar
-
-create Procedure [dbo].[InsertarCliente]
-@Id bigint ,
-@Nombre varchar(50),
-@sNombre nvarchar(50),
-@Apellido varchar(50),
-@sApellido nvarchar(50),
-@correo nvarchar(320),
-@Telefono int,
-@contrasenna nvarchar(20),
-@tipoUsuario int
-as
-
-begin
-insert into usuario ([id],[contrasenna],[tipoUsuario]) values (@Id,encryptbypassphrase('password',@contrasenna),@TipoUsuario)
-insert into Cliente([id],[nombre],[sNombre],[apellido],[sApellido],[correo],[telefono] )
-values (@Id,@Nombre,@sNombre,@Apellido,@sApellido,@correo,@Telefono)
-
-end;
-go
-
-
-
---selecionar todos clientes
-create procedure [dbo].[SelecionarTodosClientes]
-as 
-begin 
-select *from Cliente inner join Usuario on cliente.id=usuario.id
-end;
-go
-
 ----Store procedure Usuario
 --insert
 create procedure [dbo].[InsertarUsuario]
@@ -319,6 +286,39 @@ begin
 select id,convert(varchar,decryptbypassphrase('password',usuario.contrasenna)) 
 as contrasenna,usuario.tipoUsuario,usuario.estado from usuario where usuario.id=@id
 end
+go
+
+---Store procedure Cliente
+--Insertar
+
+create Procedure [dbo].[InsertarCliente]
+@Id bigint ,
+@Nombre varchar(50),
+@sNombre nvarchar(50),
+@Apellido varchar(50),
+@sApellido nvarchar(50),
+@correo nvarchar(320),
+@Telefono int,
+@contrasenna nvarchar(20),
+@tipoUsuario int
+as
+
+begin
+exec [InsertarUsuario] @id,@contrasenna,@tipoUsuario
+insert into Cliente([id],[nombre],[sNombre],[apellido],[sApellido],[correo],[telefono] )
+values (@Id,@Nombre,@sNombre,@Apellido,@sApellido,@correo,@Telefono)
+
+end;
+go
+
+
+
+--selecionar todos clientes
+create procedure [dbo].[SelecionarTodosClientes]
+as 
+begin 
+select *from Cliente inner join Usuario on cliente.id=usuario.id
+end;
 go
 
 --insert de provincia,cantones,distritos,barrios
