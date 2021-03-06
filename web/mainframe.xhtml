@@ -10,12 +10,14 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <h:outputStylesheet name="/css/default.css"/>
         <h:outputStylesheet name="/css/cssLayout.css"/>
+        <h:outputStylesheet library="css" name="index.css"></h:outputStylesheet>
         <title>main frame</title>
     </h:head>
 
     <h:body>
 
         <div id="top">
+    
            <div class="card ">
     <p:tabMenu activeIndex="#{param.i}">
         <p:menuitem class="logo" outcome="/index">
@@ -24,7 +26,7 @@
         <p:menuitem value="Pedidos" outcome="/index" icon="pi pi-star">
             <f:param name="i" value="0"/>
         </p:menuitem>
-        <p:menuitem value="Ingresar" outcome="/login" icon="pi pi-search">
+         <p:menuitem value="Ingresar" outcome="/login" icon="pi pi-file">
             <f:param name="i" value="1"/>
         </p:menuitem>
         <p:menuitem value="Mantenimiento" outcome="/index" icon="pi pi-file">
@@ -38,7 +40,7 @@
         </p:menuitem>
          
     </p:tabMenu>
-   
+              
 </div>
                 
         </div>
