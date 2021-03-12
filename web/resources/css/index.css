@@ -12,3 +12,36 @@ h{
 h2{
     color: white;
 }
+.log{
+    position: absolute;
+    top: 3vh;
+    left: 85vw;
+    display: flex;
+}
+.log a{
+    margin-left: 20px;
+    border-radius: 20%;
+    background-color: green;
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+    
+}
+.producto{
+     position: absolute;
+    top: 50vh;
+    left: 45vw;
+    text-decoration: none;
+    color: green;
+    font-weight: bold;
+    font-size: 30px;
+}
+.logo{
+     position: absolute;
+    top: 0vh;
+    left: 0vw;
+   width: 100px;
+   height: 100px;
+    border-radius: 50%;
+    
+}

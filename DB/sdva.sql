@@ -321,6 +321,55 @@ select *from Cliente inner join Usuario on cliente.id=usuario.id
 end;
 go
 
+
+--Store direccion
+--Insertar Direccion 
+create procedure [dbo].[InsertarDireccion]
+@codProvincia numeric(2,0),
+@codCanton numeric (2,0),
+@codDistrito numeric (2,0),
+@codBarrio numeric (4,0),
+@Sennas nvarchar(max)
+
+as
+begin 
+insert into Direccion (codProvincia,codCantos,codDistrito,codBarrio,sennas) values(@codProvincia,@codCanton,@codDistrito,@codBarrio,@sennas)
+end
+go
+
+
+---Store cliente-Direccion
+--insertar Cliente-Direccion
+create procedure [dbo].[InsertarClienteDireccion]
+@idCliente bigint,
+@idDireccion int,
+@diaInicio int,
+@diaFinal int,
+@horaInicio time(7),
+@horaFinal time(7)
+as 
+begin 
+Insert into ClienteDireccion (idCliente,idDireccion,diaInicio,diaFinal,horaInicio,horaFinal) values (@idCliente,@idDireccion,@diaInicio,@diaFinal,@horaInicio,@horaFinal)
+end
+go
+--seleccionar direcciones de cliente
+create procedure [dbo].[SeleccionarDireccionesCliente]
+@idCliente bigint
+as
+begin 
+select *from ClienteDireccion where clienteDireccion.idCliente=@idCliente
+end
+go
+--selecionar Direccion Especifica del cliente
+create procedure [dbo].[SeleccionarDireccionEspecificaCliente]
+@idCliente bigint,
+@Direccion int
+as
+begin 
+select *from ClienteDireccion where clienteDireccion.idCliente=@idCliente and clienteDireccion.idDireccion=@direccion
+end
+go
+
 --insert de provincia,cantones,distritos,barrios
 
 --insetrs-
