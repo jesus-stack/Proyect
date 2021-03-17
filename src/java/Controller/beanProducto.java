@@ -5,9 +5,13 @@
  */
 package Controller;
 
+<<<<<<< HEAD
 import DAO.Conexion.SNMPExceptions;
 import DAO.ProductoDB;
 import Model.Producto;
+=======
+import Model.Product;
+>>>>>>> 17f1e861ca145fa7d7048ec6d0728f2a286c5ffb
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
@@ -15,12 +19,17 @@ import java.util.LinkedList;
 
 /**
  *
+<<<<<<< HEAD
  * @author Jesus
+=======
+ * @author Usuario
+>>>>>>> 17f1e861ca145fa7d7048ec6d0728f2a286c5ffb
  */
 @Named(value = "beanProducto")
 @SessionScoped
 public class beanProducto implements Serializable {
 
+<<<<<<< HEAD
     /**
      * Creates a new instance of beanProducto
      */
@@ -51,6 +60,18 @@ public class beanProducto implements Serializable {
         
         ProductoDB.agregarProducto(product);
     }
+=======
+  
+    
+    
+    public beanProducto() {
+    }
+    
+    
+
+    
+    
+>>>>>>> 17f1e861ca145fa7d7048ec6d0728f2a286c5ffb
     
     
 }
