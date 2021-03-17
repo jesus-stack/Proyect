@@ -13,6 +13,21 @@ public class Producto {
    private double precio;
    private byte [] foto;
    private int cantidadMinimaVenta;
+   
+   private String mensaje="Leído";
+
+    public String getMensaje() {
+        return mensaje;
+    }
+
+    public void setMensaje(String mensaje) {
+        this.mensaje = mensaje;
+    }
+   
+    
+    public void AgregarMensaje(){
+    mensaje="Leido: "+id;
+    }
 
     public Producto(long id, String nombre, String descripcion, double precio, byte[] foto, int cantidadMinimaVenta) {
         this.id = id;

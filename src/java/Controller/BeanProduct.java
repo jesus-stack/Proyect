@@ -26,6 +26,7 @@ public class BeanProduct implements Serializable {
     public BeanProduct() {
         
     }
+    
 
     public LinkedList<Product> getProducts() {
        products.add(new Product(5000, 5,"Salsa Inglesa", "salsa para preparar diversos platillos","inglesa"));
