@@ -229,7 +229,7 @@ insert into tipoUsuario (id,descripcion) values(4,'Bodeguero')
 insert into usuario(id,contrasenna,estado,tipoUsuario) values (155821845336,encryptbypassphrase('password','admin'),1,1)
 insert into usuario(id,contrasenna,estado,tipoUsuario) values (402400637,encryptbypassphrase('password','admin'),1,1)
 
-Insert into funcionario (id,nombre,sNombre,apellido,sApellido,correo,telefono) values(155821845336,'Jesus','Maria','Castilla','Quintana','jcastilla@est.utn.ac.cr',64862101)
+Insert into funcionario (id,nombre,sNombre,apellido,sApellido,correo,telefono) values(155821845336,'Jesus','Maria','Castilla','Quiroz','jcastilla@est.utn.ac.cr',64862101)
 Insert into funcionario (id,nombre,sNombre,apellido,sApellido,correo,telefono) values(402400637,'Hannyer','Smykel','Pitterson','Martinez','hpitterson@est.utn.ac.cr',60117773)
 go
 
@@ -367,6 +367,28 @@ create procedure [dbo].[SeleccionarDireccionEspecificaCliente]
 as
 begin 
 select *from ClienteDireccion where clienteDireccion.idCliente=@idCliente and clienteDireccion.idDireccion=@direccion
+end
+go
+
+
+
+--Prcedure productos--
+create procedure InsertarProductos 
+@nombre varchar(20),
+@descripcion varchar(70),
+@foto image,
+@precio float,
+@cantidadMinima int
+as
+begin
+insert into producto(nombre,descripcion,foto,precio,CantidadMinimaVenta) values (@nombre,@descripcion,@foto,@precio,@cantidadMinima)
+end
+go
+
+create procedure SeleccionarProductos
+as
+begin 
+select * from producto
 end
 go
 

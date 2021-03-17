@@ -22,7 +22,7 @@
     
            <div class="card ">
     <p:tabMenu activeIndex="#{param.i}">
-        <p:menuitem class="logo" outcome="/index">
+        <p:menuitem class="brand" outcome="/index">
             <img class="logo" src="resources/img/SDVA.png" width="100" height="100" alt="SDVA"/>
         </p:menuitem>
         <p:menuitem value="Pedidos" outcome="/index" icon="pi pi-star">
@@ -46,38 +46,27 @@
 </div>
                 
         </div>
-        <div>
+        
             <div id="left">
                 <ui:insert name="left"></ui:insert>
             </div>
-            <div>
+         
                 <div id="right">
                     <ui:insert name="right"></ui:insert>
                 </div>
                 <div id="content" class="right_content">
                     <ui:insert name="content"></ui:insert>
                 </div>
-            </div>
-        </div>
+        
+    
         <div id="bottom">
-            <div>
+            
                    <h2>Sistema Digital de Ventas de Limentos</h2>
               
                 <h3>alimentos al alcance de un click</h3>
                 <p>Telefono: 8877-6655  Correo: atencioncliente@sdva.cr</p>
-            </div>
-            <div class="card">
-                
-             
-               <p:stack icon="/resources/demo/images/dock/stack.png" expanded="false">
-    <p:menuitem value="Home" icon="/resources/demo/images/dock/home.png" outcome="/index"/>
-    <p:menuitem value="Music" icon="/resources/demo/images/dock/music.png" url="#"/>
-    <p:menuitem value="Video" icon="/resources/demo/images/dock/video.png" url="#"/>
-    <p:menuitem value="Email" icon="/resources/demo/images/dock/email.png" url="#"/>
-    <p:menuitem value="Portfolio" icon="/resources/demo/images/dock/portfolio.png" outcome="/index"/>
-</p:stack>   
-                
-            </div>
+        
+        
          
         </div>
 

@@ -1,0 +1,106 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+
+    <body>
+
+        <ui:composition template="/mainframe.xhtml">
+        
+
+            <ui:define name="content">
+                 <h:outputStylesheet library="css" name="mantenimiento.css"></h:outputStylesheet>
+               
+                <div class="card">
+                    <table border="0" cellspacing="36" cellpadding="15">
+                        <thead>
+                            <tr>
+                                <th><h>Mantenimiento de productos</h></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <h:button class="button new" value="Nuevo"></h:button>
+                                    <h:button class="button save"  value="Guardar"></h:button>
+                                    <h:button class="button edit" value="Editar"></h:button>
+                                    <h:button class="button delete" value="Eliminar"></h:button>
+                                    <h:button class="button help" value="Ayuda"></h:button>
+                                    <h:button class="button search" value="Buscar"></h:button>
+                                    <h:button class="button exit" value="Salir"></h:button>
+                                   
+                                    
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <p:dataTable value="#{beanProducto.lista}" var="pro">
+                                        <p:column headerText="Id">
+                                            #{pro.id}
+                                        </p:column>
+                                        <p:column headerText="Nombre">
+                                           
+                                            
+                                        </p:column>  
+                                         <p:column headerText="Descripcion">
+                                            
+                                        </p:column> 
+                                         <p:column headerText="Precio">
+                                            
+                                        </p:column> 
+                                         <p:column headerText="Cantidad minima venta">
+                                            
+                                        </p:column> 
+                                         <p:column headerText="Imagen">
+                                             
+                                             <p:graphicImage value="#{pro.imagen}"></p:graphicImage>
+                                        </p:column> 
+                                    </p:dataTable>
+                                </td>
+                            </tr>
+                            
+                        </tbody>
+                      
+                    </table>
+                   
+                  
+                </div>
+            </ui:define>
+            
+            <ui:define name="left">
+                
+                
+                    <div class="card">
+                        <h2>Producto
+                        </h2>
+                        <h:form enctype="multipart/form-data" >
+                      
+                            <p:outputLabel class="label" for="name" value="Nombre"></p:outputLabel>
+                            <p:inputText id="name" value="#{beanProducto.product.nombre}"></p:inputText>
+                                <p:outputLabel class="label" for="dsc" value="Descripcion"></p:outputLabel>
+                                <p:inputText id="dsc" value="#{beanProducto.product.descripcion}" ></p:inputText>
+                                <p:outputLabel class="label" for="price" value="Precio"></p:outputLabel>
+                                <p:inputNumber id="price" value="#{beanProducto.product.precio}"></p:inputNumber>
+                                <p:outputLabel class="label" for="min" value="Cantidad minima venta"></p:outputLabel>
+                                <p:inputNumber id="min" value="#{beanProducto.product.cantidadMinimaVenta}"></p:inputNumber>
+                                <p:outputLabel class="label" for="img" value="Imagen"></p:outputLabel>
+                                <h:panelGrid columns="1">
+                                    <p:fileUpload  value="#{beanProducto.product.filefoto}" mode="simple" accept=".png" skinSimple="true" id="img"></p:fileUpload>
+                                </h:panelGrid>
+                                 <h:commandButton value="qwefvd" actionListener="#{beanProducto.agregarProducto()}"></h:commandButton>
+                                
+                                
+                      
+                        </h:form>
+                        
+                    </div>
+                  
+               
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

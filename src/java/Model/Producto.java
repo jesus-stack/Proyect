@@ -5,14 +5,24 @@
  */
 package Model;
 
+import java.awt.Image;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.sql.Blob;
+import javax.imageio.ImageIO;
+import org.primefaces.model.file.UploadedFile;
+
 
 public class Producto {
     
-   private long id;
+   private int id;
    private String nombre, descripcion;
    private double precio;
-   private byte [] foto;
+   private byte[] foto;
    private int cantidadMinimaVenta;
+
    
    private String mensaje="Leído";
 
@@ -29,7 +39,7 @@ public class Producto {
     mensaje="Leido: "+id;
     }
 
-    public Producto(long id, String nombre, String descripcion, double precio, byte[] foto, int cantidadMinimaVenta) {
+    public Producto(int id, String nombre, String descripcion, double precio, byte[] foto, int cantidadMinimaVenta) {
         this.id = id;
         this.nombre = nombre;
         this.descripcion = descripcion;
@@ -37,6 +47,10 @@ public class Producto {
         this.foto = foto;
         this.cantidadMinimaVenta = cantidadMinimaVenta;
     }
+
+
+
+
 
     public Producto() {
         this.id = 0;
@@ -47,11 +61,11 @@ public class Producto {
         this.cantidadMinimaVenta = 0;
     }
 
-    public long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -97,7 +111,7 @@ public class Producto {
 
 
     
-    
+   
     
     
     

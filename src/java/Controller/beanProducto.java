@@ -5,26 +5,78 @@
  */
 package Controller;
 
-import Model.Product;
+
+import DAO.Conexion.SNMPExceptions;
+import DAO.ProductoDB;
 import Model.Producto;
+import Model.Product;
+
+import Model.Producto;
+import static com.sun.corba.se.spi.presentation.rmi.StubAdapter.request;
+import java.io.InputStream;
+
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
 import java.util.LinkedList;
+import javax.mail.Part;
+import javax.servlet.http.HttpServletRequest;
 
 /**
  *
+
+ * @author Jesus
+=======
  * @author Usuario
+
  */
 @Named(value = "beanProducto")
 @SessionScoped
 public class beanProducto implements Serializable {
 
+
 LinkedList lista; 
-    
-    
+
+    /**
+     * Creates a new instance of beanProducto
+     */
+       private Producto product=new Producto();
+       
     public beanProducto() {
+     
     }
+
+    public Producto getProduct() {
+        return product;
+    }
+
+    public void setProduct(Producto product) {
+        this.product = product;
+    }
+//
+//    public LinkedList<Producto> getLista() throws SNMPExceptions {
+//      return  ProductoDB.seleccionarProductos();
+//    }
+
+ 
+
+    public LinkedList getLista() {
+        lista=llenarLista();
+        return lista;
+    }
+
+    public void setLista(LinkedList lista) {
+        this.lista = lista;
+    }
+    
+    
+public void insertarProducto(){
+ HttpServletRequest req;   
+ //Part p=req.getPart("foto");
+}
+    
+    
+  
     
     
 public LinkedList llenarLista(){
@@ -43,16 +95,7 @@ public LinkedList llenarLista(){
 return lista;   
 }
 
-    public LinkedList getLista() {
-        lista=llenarLista();
-        return lista;
-    }
 
-    public void setLista(LinkedList lista) {
-        this.lista = lista;
-    }
-    
-    
     
     
 }

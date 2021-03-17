@@ -1,0 +1,44 @@
+h{
+    font-size: 30px;
+    color: #41A1C9;
+}
+.button{
+    margin-right: 15px;
+    border-radius: 20%;
+    border: none;
+    cursor: pointer;
+    font-size: 15px;
+}
+
+.new{
+    background-color: white;
+    color: blue;
+}
+.save{
+        background-color: lightseagreen;
+    color: white;
+}
+.edit{
+        background-color: green;
+    color: white;
+}
+.delete{
+        background-color: darkred;
+    color: white;
+}
+.help{
+        background-color: aqua;
+    color: blue;
+}
+
+.search{
+        background-color: blue;
+    color: white;
+}
+.exit{
+        background-color: blue;
+    color: white;
+}
+.label{
+    color:#41A1C9;
+}

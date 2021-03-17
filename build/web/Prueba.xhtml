@@ -15,10 +15,12 @@ and open the template in the editor.
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     </head>
     <body>
-        <h:form>
-       <h:selectOneMenu >
-           <f:selectItems value="#{beanCliente.listaTipoUsuario()}"/>
-                       </h:selectOneMenu>
+        <h:form enctype="multipart/form-data">
+            <h:outputLabel value="Descripcion"/>
+            <h:inputText />
+            <input type="file" name="foto" />
+            <hr/>
+                <h:commandButton type="submit" value="Aceptar"/>
   </h:form>
     </body>
 </html>
