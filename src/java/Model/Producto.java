@@ -5,23 +5,26 @@
  */
 package Model;
 
+import java.awt.Image;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import javax.imageio.ImageIO;
+import org.primefaces.model.file.UploadedFile;
+
 
 public class Producto {
     
-   private long id;
+   private int id;
    private String nombre, descripcion;
    private double precio;
    private byte [] foto;
    private int cantidadMinimaVenta;
+   private UploadedFile filefoto;
+   private Image imagen;
 
-    public Producto(long id, String nombre, String descripcion, double precio, byte[] foto, int cantidadMinimaVenta) {
-        this.id = id;
-        this.nombre = nombre;
-        this.descripcion = descripcion;
-        this.precio = precio;
-        this.foto = foto;
-        this.cantidadMinimaVenta = cantidadMinimaVenta;
-    }
+
 
     public Producto() {
         this.id = 0;
@@ -32,11 +35,11 @@ public class Producto {
         this.cantidadMinimaVenta = 0;
     }
 
-    public long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -78,6 +81,25 @@ public class Producto {
 
     public void setCantidadMinimaVenta(int cantidadMinimaVenta) {
         this.cantidadMinimaVenta = cantidadMinimaVenta;
+    }
+
+    public UploadedFile getFilefoto() {
+        return filefoto;
+    }
+
+    public void setFilefoto(UploadedFile filefoto) {
+        this.filefoto = filefoto;
+    }
+
+    public Image getImagen() throws IOException {
+        BufferedImage bufimg;
+        InputStream in=new ByteArrayInputStream(filefoto.getContent());
+         bufimg= ImageIO.read(in);
+        return bufimg;
+    }
+
+    public void setImagen(Image imagen) {
+        this.imagen = imagen;
     }
 
 

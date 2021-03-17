@@ -1,6 +1,11 @@
 .cimage{
     height: 100px;
 }
+.brand{
+    height: 100px;
+    width: 100px;
+    border-radius: 50%;
+}
 .letter{
     color: #3399FF;
 }
@@ -25,23 +30,32 @@ h2{
     text-decoration: none;
     color: white;
     font-weight: bold;
-    
+
 }
 .producto{
-     position: absolute;
+    position: absolute;
     top: 50vh;
     left: 45vw;
     text-decoration: none;
-    color: green;
+    color: white;
+    border-radius: 20%;
     font-weight: bold;
     font-size: 30px;
+    border: solid black 2px;
+    box-shadow: 0px 15px 15px;
+}
+.producto:hover{
+    background-color: greenyellow;
+    color: darkblue;
+    height: 35px
 }
 .logo{
-     position: absolute;
+    position: absolute;
     top: 0vh;
     left: 0vw;
-   width: 100px;
-   height: 100px;
+    width: 100px;
+    height: 100px;
     border-radius: 50%;
-    
+
 }
+
